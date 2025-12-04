@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Picnic Fun - Family Games & Activities</title>
+
+<!-- Modern, clean, and readable fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+/* --- 1. THEME: ORANGE & BLACK PALETTE --- */
+:root {
+  --primary: #0F0F0F;      /* Near Black (Main Structure, Headings) */
+  --primary-dark: #000000; /* Pure Black (Footer, Strongest Contrast) */
+  --accent: #FF8C42;       /* Warm Sunset Orange (Buttons, Links) */
+  --secondary: #AAAAAA;    /* Light Gray (Subtle accents/Borders) */
+  --light: #FFFFFF;        /* Pure White (Main Background) */
+  --card-bg: #FFFFFF;      /* Pure White for Cards */
+  --dark: #333333;         /* Dark text for readability */
+  --text: #555555;         /* Medium grey for body text */
+  --shadow: 0 10px 20px rgba(0,0,0,0.08); /* Stronger, defined shadow */
+}
+
+/* --- 2. BASE STYLES & TYPOGRAPHY --- */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; } /* Smooth scrolling for navigation */
+
+body { 
+    font-family:'Inter', sans-serif; 
+    line-height:1.7; 
+    color:var(--text); 
+    background:var(--light); 
+}
+
+h1,h2,h3 { font-family:'Playfair Display', serif; font-weight: 700; color:var(--primary); margin-bottom:1rem; }
+h1{font-size:3.5rem;} 
+h2{font-size:2.5rem; color:var(--primary-dark);}
+
+/* --- 3. HEADER & NAVIGATION --- */
+header {background:var(--card-bg);box-shadow:0 2px 10px rgba(0,0,0,0.05);position:sticky;top:0;z-index:1000;}
+.header-container {display:flex;justify-content:space-between;align-items:center;padding:15px 5%;max-width:1400px;margin:auto;}
+.logo{display:flex;align-items:center; color: var(--primary);}
+
+/* UPDATED: Styles for the new logo image */
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px; /* Maintain rounded corners */
+    margin-right: 10px;
+    object-fit: cover;
+    background: var(--primary); /* Background for the placeholder */
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.logo h1 { margin-bottom: 0; font-size: 1.8rem; font-family: 'Inter', sans-serif; font-weight: 800; }
+
+nav ul{display:flex;list-style:none;}
+nav li{margin-left:30px;}
+nav a{color:var(--dark);font-weight:600;text-decoration:none;transition:color 0.3s, border-bottom 0.3s;}
+nav a:hover{color:var(--accent);border-bottom: 2px solid var(--accent);padding-bottom: 2px;}
+
+/* NEW: Active link styling */
+nav a.active-link {
+    color: var(--accent);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 2px;
+}
+
+/* --- 4. HERO SECTION --- */
+#hero{
+    /* Use strong gradient over image for definition, using the new black primary color */
+    background:linear-gradient(rgba(15, 15, 15, 0.9),rgba(15, 15, 15, 0.7)),url('./23.jpg' ) center/cover fixed;
+    color:white;
+    text-align:center;
+    padding:150px 20px;
+    border-radius:0 0 30px 30px;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 0.5rem; color: white; line-height: 1.1; }
+#hero p{max-width:800px;margin:20px auto 50px;font-size:clamp(1rem, 2vw, 1.3rem);font-weight:400;}
+
+/* --- 5. BUTTONS (Shared Style) --- */
+.btn{
+    display:inline-block;
+    color:var(--primary-dark); /* Dark text on bright orange button */
+    padding:14px 30px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    background:var(--accent); /* Orange button color */
+    box-shadow: 0 6px 15px rgba(255, 140, 66, 0.5); 
+    font-weight: 700;
+    text-decoration: none;
+}
+.btn:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 25px rgba(255, 140, 66, 0.7);
+    background: #FF9B60; /* Slightly lighter orange on hover */
+}
+
+/* --- 6. SECTIONS & GRIDS --- */
+section{padding:100px 0;}
+.section-header{text-align:center;margin-bottom:60px;}
+.section-header h2 { text-transform: capitalize; letter-spacing: -1px; }
+.section-header p { color: var(--text); max-width: 600px; margin: 0 auto; font-size: 1.1rem;}
+.category-grid,.games-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:40px;width:90%;max-width:1200px;margin:auto;}
+
+/* --- 7. CARDS (Unified & Polished) --- */
+.category-card,.game-card{
+    background:var(--card-bg);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.27); /* Springy transition */
+    border: 1px solid rgba(0,0,0,0.05); 
+}
+.category-card:hover, .game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+}
+
+.card-placeholder {
+    height: 200px; /* Taller placeholder */
+    background: var(--secondary); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-dark);
+    font-weight: 700;
+    font-size: 1.1rem;
+    overflow: hidden; 
+    border-radius: 18px 18px 0 0; 
+}
+.card-placeholder video, .card-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.category-card-content, .game-card-content {
+    padding: 30px 25px; 
+    text-align: center;      
+    display: flex;           
+    flex-direction: column;
+    align-items: center;     
+    justify-content: center;
+}
+.category-card-content h3 {
+    color: var(--primary); 
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+}
+.category-card-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+/* Specific styling for Testimonial and Tip cards */
+#testimonials .card-placeholder, #tips .card-placeholder {
+    height: 140px; 
+    background: var(--light);
+}
+#testimonials .card-placeholder img, #tips .card-placeholder img {
+    border-radius: 50%; 
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 3px solid var(--secondary); /* Small border around profile pic */
+}
+#testimonials .category-card-content p {
+    font-style: italic;
+    color: var(--dark);
+    font-size: 0.95rem;
+}
+/* Style for newly added testimonials */
+.new-testimonial {
+    animation: bounceIn 0.8s ease-out;
+}
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+    60% { opacity: 1; transform: scale(1.05) translateY(-5px); }
+    100% { transform: scale(1) translateY(0); }
+}
+
+/* --- CONTACT FORM --- */
+#contact{background:var(--light); padding-top: 50px;} 
+.contact-section { width:90%; max-width:700px; margin:auto; }
+
+.contact-form{
+    background:var(--card-bg);
+    padding:40px;
+    border-radius:18px;
+    box-shadow:var(--shadow);
+}
+.contact-form label { display: block; margin-bottom: 5px; font-weight: 700; color: var(--primary); }
+.contact-form input,.contact-form textarea{
+    width:100%;
+    padding:14px;
+    border:2px solid var(--secondary);
+    border-radius:10px;
+    margin-bottom:20px;
+    font-size:1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.contact-form input:focus,.contact-form textarea:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 140, 66, 0.3);
+}
+
+/* --- MODAL --- */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);z-index:1000;overflow-y: auto;}
+.modal-content{background:white;margin:40px auto;max-width:90%;width:800px;border-radius:16px;box-shadow:0 15px 35px rgba(0,0,0,0.5);overflow:hidden;animation:fadeIn 0.4s ease-out;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
+.modal-header{background:var(--primary);color:white;padding:25px;display:flex;justify-content:space-between;align-items:center;}
+.modal-header h2 { color: white; margin-bottom: 0; }
+.close-modal{font-size:2rem;background:none;border:none;color:white;cursor:pointer;transition: transform 0.2s;}
+.close-modal:hover { transform: rotate(90deg); }
+.modal-body{padding:30px; line-height: 1.8;}
+.video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:25px;border-radius:10px;box-shadow:var(--shadow);}
+.video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border: none;}
+
+/* --- FOOTER --- */
+footer{background:var(--primary-dark);color:var(--secondary);padding:40px 10px;margin-top: 60px;}
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align content to the top */
+    max-width: 1200px;
+    margin: auto;
+    width: 90%;
+    text-align: left;
+}
+.footer-column {
+    flex: 1;
+    min-width: 150px;
+    padding: 0 15px;
+}
+.footer-column h4 {
+    color: var(--accent); /* Use orange for footer headings */
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-column li {
+    margin-bottom: 8px;
+}
+.footer-column a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+.footer-column a:hover {
+    color: var(--accent);
+}
+.footer-copyright {
+    flex: 2; /* Give more space to copyright/info column */
+    max-width: 400px;
+    min-width: 250px;
+    text-align: left;
+    padding-right: 30px;
+}
+.footer-copyright p { margin: 0; font-size: 0.9rem; line-height: 1.5; }
+
+/* --- RESPONSIVENESS --- */
+@media(max-width:900px){
+    #hero h1 { font-size: 3rem; }
+    .category-grid, .games-container { gap: 30px; }
+}
+
+@media(max-width:768px){
+    .header-container{flex-direction:column; padding-bottom: 10px;}
+    nav ul{margin-top: 10px; justify-content: center; flex-wrap: wrap;}
+    nav li{margin: 0 10px 10px 10px;}
+    #hero { padding: 100px 20px 80px; }
+    #hero h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    section { padding: 60px 0; }
+    .category-grid { grid-template-columns: 1fr; }
+    .modal-content { margin: 20px auto; }
+    
+    /* Responsive adjustments for footer */
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-column, .footer-copyright {
+        padding: 20px 0;
+        min-width: 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+    .footer-column ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .footer-column li {
+        margin: 0 10px 10px 10px;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="logo">
+        <img src="LOGO.png" alt="Picnic Fun Logo" class="logo-img">
+        <h1>Picnic Fun</h1>
+    </div>
+    <nav>
+        <ul>
+            <!-- Added data-section attributes for JavaScript targeting -->
+            <li><a href="#hero" data-section="hero">Home</a></li>
+            <li><a href="#categories" data-section="categories">Games</a></li>
+            <li><a href="#testimonials" data-section="testimonials">Testimonials</a></li>
+            <li><a href="#tips" data-section="tips">Tips</a></li>
+            <li><a href="#contact" data-section="contact">Contact</a></li>
+        </ul>
+    </nav>
+  </div>
+</header>
+
+<section id="hero">
+  <h1>Fun That Brings Families Together</h1>
+  <p>Browse a wide collection of indoor and outdoor games ideal for picnics, family occasions, and shared moments with loved ones. Discover your next favorite memory.</p>
+  <a href="#categories" class="btn">Discover Our Games</a>
+</section>
+
+<section id="categories">
+  <div class="section-header"><h2>Find the Game You’ll Love</h2><p>Browse our curated selection of family games categorized by type and audience.</p></div>
+  <div class="category-grid">
+    <!-- Charades -->
+    <div class="category-card" data-game-key="charades">
+      <div class="card-placeholder"> <video src="./video 11.mp4" autoplay muted loop></video></div>
+      <div class="category-card-content">
+        <h3>Charades</h3>
+        <p>A classic acting game perfect for all ages that guarantees laughter.</p>
+        <button class="btn view-game-btn" data-game-key="charades">View Details</button>
+      </div>
+    </div>
+    <!-- Three-Legged Race -->
+    <div class="category-card" data-game-key="three-legged-race">
+      <div class="card-placeholder"><video src="20251108_194025.mp4" autoplay muted loop></video></div>
+      <div class="category-card-content"><h3>Three-Legged Race</h3><p>A fun coordination challenge for partners that builds teamwork.</p><button class="btn view-game-btn" data-game-key="three-legged-race">View Details</button></div>
+    </div>
+    <!-- Sack Race -->
+    <div class="category-card" data-game-key="sack-race">
+      <div class="card-placeholder"> <video src="./video132.mp4" autoplay muted loop></video></div>
+      <div class="category-card-content"><h3>Sack Race</h3><p>Jump your way to the finish line in a lively, competitive dash.</p><button class="btn view-game-btn" data-game-key="sack-race">View Details</button></div>
+    </div>
+    <!-- Pictionary -->
+    <div class="category-card" data-game-key="pictionary">
+      <div class="card-placeholder"><video src="./PICTINOARY.mp4" autoplay muted loop></video></div>
+      <div class="category-card-content"><h3>Pictionary</h3><p>A drawing and guessing game for creative minds and quick thinkers.</p><button class="btn view-game-btn" data-game-key="pictionary">View Details</button></div>
+    </div>
+    <!-- Simon Says -->
+    <div class="category-card" data-game-key="simon-says">
+      <div class="card-placeholder"><video src="./Simon Says Game - THE KIBOOMERS Preschool Songs - Brain Break.mp4" autoplay muted loop></video></div>
+      <div class="category-card-content"><h3>Simon Says</h3><p>A classic listening game—can you follow the leader's commands exactly?</p><button class="btn view-game-btn" data-game-key="simon-says">View Details</button></div>
+    </div>
+    <!-- Tug of War -->
+    <div class="category-card" data-game-key="tug-of-war">
+      <div class="card-placeholder"><video src="./Tug Of War! _ Heave Ho! _ Fun kids Songs and Nursery Rhymes!.mp4" autoplay muted loop></video></div>
+      <div class="category-card-content"><h3>Tug of War</h3><p>A thrilling test of strength and teamwork for two opposing teams.</p><button class="btn view-game-btn" data-game-key="tug-of-war">View Details</button></div>
+    </div>
+    <!-- Water Balloon Toss -->
+    <div class="category-card" data-game-key="water-balloon-toss">
+      <div class="card-placeholder"><video src="./video15.mp4" autoplay muted loop></video></div>
+      <div class="category-card-content">
+        <h3>Water Balloon Toss</h3>
+        <p>Cool off with a fun tossing challenge on a hot summer day!</p>
+        <button class="btn view-game-btn" data-game-key="water-balloon-toss">View Details</button>
+      </div>
+    </div>
+    <!-- Treasure Hunt -->
+    <div class="category-card" data-game-key="treasure-hunt">
+      <div class="card-placeholder"><video src="./video16.mp4" autoplay muted loop></video></div>
+      <div class="category-card-content">
+        <h3>Treasure Hunt</h3>
+        <p>A challenging quest to search for hidden treasures using clever clues.</p>
+        <button class="btn view-game-btn" data-game-key="treasure-hunt">View Details</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: Testimonials -->
+<section id="testimonials">
+  <div class="section-header"><h2>What Families Say</h2><p>Our games aren't just fun—they help create lasting memories.</p></div>
+  <!-- ADDED ID for JavaScript targeting -->
+  <div id="testimonialsGrid" class="category-grid">
+    <div class="category-card">
+      <div class="card-placeholder"><img src="./emily.jfif" alt="Emily's Profile Picture"></div>
+      <div class="category-card-content">
+        <h3>Emily R.</h3>
+        <p>"The treasure hunt was a huge hit! The kids and adults were engaged for hours. Best picnic activity we've ever done."</p>
+      </div>
+    </div>
+    <div class="category-card">
+      <div class="card-placeholder"><img src="./raj.jfif" alt="Raj's Profile Picture"></div>
+      <div class="category-card-content">
+        <h3>Raj K.</h3>
+        <p>"The instructions for the Three-legged race were so clear. It brought so much laughter and teamwork to our annual family gathering!"</p>
+      </div>
+    </div>
+    <div class="category-card">
+      <div class="card-placeholder"><img src="./maria.jfif" alt="Maria's Profile Picture"></div>
+      <div class="category-card-content">
+        <h3>Maria S.</h3>
+        <p>"We used the Pictionary ideas for a rainy day inside. It was a creative way to spend quality time. Highly recommend!"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: Tips & Tricks -->
+<section id="tips">
+  <div class="section-header"><h2>Picnic Preparation Tips</h2><p>Ensure your day runs smoothly with these essential tips and tricks.</p></div>
+  <div class="category-grid">
+    <div class="category-card">
+      <div class="card-placeholder"><img src="./snacks tips.png" alt="Icon for Snacks"></div>
+      <div class="category-card-content">
+        <h3>Pack Smart Snacks</h3>
+        <p>Choose easy-to-handle, non-messy foods like fruit and sandwiches to keep energy levels high without the fuss.</p>
+      </div>
+    </div>
+    <div class="category-card">
+      <div class="card-placeholder"><img src="./tips and tricks 2.png" alt="Icon for Blankets"></div>
+      <div class="category-card-content">
+        <h3>Bring Extra Blankets</h3>
+        <p>A few extra blankets provide comfortable seating for everyone, especially if the ground is damp or uneven.</p>
+      </div>
+    </div>
+    <div class="category-card">
+      <div class="card-placeholder"><img src="./tips and tricks 3.png" alt="Icon for Planning"></div>
+      <div class="category-card-content">
+        <h3>Have a Rain Backup</h3>
+        <p>Always have an indoor game plan ready in case the weather turns. Simon Says works great inside!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: Contact -->
+<section id="contact">
+  <section class="contact-section">
+    <div class="section-header">
+      <h2>Get in Touch</h2>
+      <p>We’re here to help you plan the perfect fun day. Send us a message anytime!</p>
+    </div>
+  
+    <form id="contactForm" class="contact-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
+      </div>
+
+      <button type="submit" id="contactSubmitBtn" class="btn">Send Message</button>
+    </form>
+  </section>
+</section>
+
+<!-- FOOTER WITH SITE MAP -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-copyright">
+      <div class="logo" style="color: white; margin-bottom: 15px;">
+        <img src="LOGO.png" alt="Picnic Fun Logo" class="logo-img">
+        <h1 style="color: white; font-size: 1.8rem; font-family: 'Playfair Display', serif; font-weight: 700;">Picnic Fun</h1>
+      </div>
+      <p>Picnic Fun provides curated instructions and ideas for unforgettable family games and activities, turning any outdoor space into a playground of memories.</p>
+      <p style="margin-top: 20px;">&copy; 2025 Picnic Fun. All rights reserved.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#categories">Games Catalog</a></li>
+        <li><a href="#tips">Preparation Tips</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Game Categories</h4>
+      <ul>
+        <li><a href="#categories" data-game-key="charades">Indoor Games</a></li>
+        <li><a href="#categories" data-game-key="three-legged-race">Outdoor Races</a></li>
+        <li><a href="#categories" data-game-key="water-balloon-toss">Water Games</a></li>
+        <li><a href="#categories" data-game-key="pictionary">Creative Games</a></li>
+        <li><a href="#categories" data-game-key="tug-of-war">Team Challenges</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL STRUCTURE -->
+<div id="gameModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header"><h2 id="modalGameTitle">Game Title</h2><button class="close-modal">&times;</button></div>
+    <div class="modal-body">
+      <div class="video-container"><iframe id="modalVideoPlayer" src="" allowfullscreen></iframe></div>
+      <div id="modalInstructions"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// --- GAME DATA (Unchanged) ---
+const games = {
+  "charades": {title:"Charades",video:"video 11.mp4",instructions:"<p><strong>Players:</strong> 4+ | <strong>Duration:</strong> 15+ mins</p><p>Act out clues for your team without speaking! Teams alternate taking turns. A strict timer keeps the pressure on!</p>"},
+  "three-legged-race": {title:"Three-Legged Race",video:"20251108_194025.mp4",instructions:"<p><strong>Players:</strong> 2 per team | <strong>Duration:</strong> 10 mins</p><p>Partners stand side-by-side, and one leg of each partner is tied together. They must race to the finish line, requiring excellent synchronization!</p>"},
+  "sack-race": {title:"Sack Race",video:"video132.mp4",instructions:"<p><strong>Players:</strong> 2+ | <strong>Duration:</strong> 10 mins</p><p>Participants step into a large sack or bag and hop to the finish line. Falling over is encouraged for maximum fun!</p>"},
+  "pictionary": {title:"Pictionary",video:"PICTINOARY.mp4",instructions:"<p><strong>Players:</strong> 4+ | <strong>Duration:</strong> 20+ mins</p><p>Teams compete to guess words or phrases based on drawings made by their teammate. No talking, no letters, just art!</p>"},
+  "simon-says": {title:"Simon Says",video:"Simon Says Game - THE KIBOOMERS Preschool Songs - Brain Break.mp4",instructions:"<p><strong>Players:</strong> 3+ | <strong>Duration:</strong> 10 mins</p><p>The designated leader gives commands, but participants only follow if the command is preceded by the phrase 'Simon Says.' It's a test of focus!</p>"},
+  "tug-of-war": {title:"Tug of War",video:"Tug Of War! _ Heave Ho! _ Fun kids Songs and Nursery Rhymes!.mp4",instructions:"<p><strong>Players:</strong> 6+ | <strong>Duration:</strong> 10 mins</p><p>Two teams pull on opposite ends of a rope, attempting to drag the opposing team across a central line. Pure strength and teamwork!</p>"},
+  "water-balloon-toss": {title:"Water Balloon Toss",video:"video15.mp4",instructions:"<p><strong>Players:</strong> 2+ | <strong>Duration:</strong> 15 mins</p><p>Partners toss a water balloon back and forth, taking a step back after each successful catch. The last pair with an unbroken balloon wins!</p>"},
+  "treasure-hunt": {title:"Treasure Hunt",video:"video16.mp4",instructions:"<p><strong>Players:</strong> 1+ | <strong>Duration:</strong> 30+ mins</p><p>Players follow a series of clues, maps, or riddles to find a hidden 'treasure.' Great for adding an element of adventure to the picnic!</p>"}
+};
+
+// --- DOM ELEMENTS ---
+const modal=document.getElementById('gameModal');
+const viewBtns=document.querySelectorAll('.view-game-btn');
+const closeModal=document.querySelector('.close-modal');
+const modalTitle=document.getElementById('modalGameTitle');
+const modalVid=document.getElementById('modalVideoPlayer');
+const modalInst=document.getElementById('modalInstructions');
+const testimonialsGrid = document.getElementById('testimonialsGrid');
+const navLinks = document.querySelectorAll('nav a');
+const sections = document.querySelectorAll('section');
+
+// --- MODAL LOGIC (Unchanged) ---
+viewBtns.forEach(btn=>{
+  btn.onclick=()=>{
+    const key=btn.dataset.gameKey;
+    const game=games[key];
+    modalTitle.textContent=game.title;
+    modalVid.src=game.video+"?autoplay=1&mute=1";
+    modalInst.innerHTML=game.instructions;
+    modal.style.display='block';
+    document.body.style.overflow = 'hidden';
+  };
+});
+
+const closeModalAction = () => {
+  modal.style.display='none';
+  modalVid.src='';
+  document.body.style.overflow = '';
+};
+
+closeModal.onclick=closeModalAction;
+window.onclick=e=>{if(e.target===modal){closeModalAction();}};
+
+// --- FEEDBACK FORM LOGIC (Unchanged functionality, slightly cleaner code) ---
+document.getElementById('contactForm').onsubmit=e=>{
+  e.preventDefault();
+  
+  const nameInput = document.getElementById('name');
+  const messageInput = document.getElementById('message');
+  
+  const authorName = nameInput.value.trim() || 'Anonymous User';
+  const messageText = messageInput.value.trim();
+
+  if (messageText) {
+    const initial = authorName.charAt(0).toUpperCase();
+    const placeholderUrl = `https://placehold.co/100x100/AAAAAA/000000?text=${initial}`;
+    
+    const newCardHtml = `
+      <div class="category-card new-testimonial">
+        <div class="card-placeholder"><img src="${placeholderUrl}" alt="${authorName}'s Profile Picture"></div>
+        <div class="category-card-content">
+          <h3>${authorName}</h3>
+          <p>"${messageText}"</p>
+        </div>
+      </div>
+    `;
+
+    testimonialsGrid.insertAdjacentHTML('afterbegin', newCardHtml);
+    document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' });
+
+    // Custom non-alert message box
+    const messageBox = document.createElement('div');
+    messageBox.textContent = 'Feedback added! Thank you for sharing your experience.';
+    messageBox.style.cssText = `
+      position: fixed; top: 20px; right: 20px; padding: 15px 30px; 
+      background-color: var(--primary); color: white; border-radius: 10px; 
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1001; opacity: 0;
+      transition: opacity 0.5s, transform 0.5s; transform: translateX(100%);
+      font-family: 'Inter', sans-serif;
+    `;
+    document.body.appendChild(messageBox);
+    
+    setTimeout(() => {
+      messageBox.style.opacity = '1';
+      messageBox.style.transform = 'translateX(0)';
+    }, 10);
+
+    setTimeout(()=>{
+      messageBox.style.opacity = '0';
+      messageBox.style.transform = 'translateX(100%)';
+    },3000);
+    
+    setTimeout(() => {
+      messageBox.remove();
+      e.target.reset();
+    }, 3500);
+
+  } else {
+    console.warn("Cannot submit empty feedback.");
+  }
+};
+
+
+// --- NEW: ACTIVE NAV LINK LOGIC using Intersection Observer ---
+
+// Function to remove all active classes
+const removeActiveClass = () => {
+    navLinks.forEach(link => {
+        link.classList.remove('active-link');
+    });
+};
+
+// Function to add active class to the corresponding link
+const setActiveLink = (id) => {
+    removeActiveClass();
+    const activeLink = document.querySelector(`nav a[data-section="${id}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active-link');
+    }
+};
+
+// Intersection Observer Callback
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        // We only care about entries that are currently intersecting
+        if (entry.isIntersecting) {
+            // Get the ID of the intersecting section
+            const sectionId = entry.target.id;
+            
+            // Set the corresponding navigation link as active
+            // We ensure that 'hero' is only active when at the very top.
+            if (sectionId === 'hero' && entry.boundingClientRect.top > 0) {
+                // Ignore hero if scrolling up from below a certain point
+            } else {
+                setActiveLink(sectionId);
+            }
+        }
+    });
+};
+
+// Intersection Observer Options
+const observerOptions = {
+    root: null, // relative to the viewport
+    rootMargin: "0px 0px -50% 0px", // triggers when 50% of the section is visible
+    threshold: 0 // trigger immediately
+};
+
+// Initialize the observer
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+// Observe all sections
+sections.forEach(section => {
+    observer.observe(section);
+});
+
+// Initial check for 'hero' section when the page loads
+window.addEventListener('load', () => {
+    if (window.scrollY === 0) {
+        setActiveLink('hero');
+    }
+});
+
+</script>
+</body>
+</html>
